@@ -1,0 +1,83 @@
+index1.html
+Building your first react Applications
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch02.xhtml#ch02
+
+
+index2.html
+Component in react
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch03.xhtml#ch03
+
+index3.html
+Styling in react
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch04.xhtml#ch04
+see styling via className attribute or sety by style object
+
+index4.html
+Creating complex Component
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch05.xhtml#ch05
+
+index5.html
+Transferring Properties
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch06.xhtml#ch06
+You can’t pass a property directly to the component or components that you want to target. The reason has to do with how React works. React enforces a chain of command in which properties have to flow down from a parent component to an immediate child component. This means you can’t skip a layer of children when sending a property. This also means your children can’t send a property back up to a parent. All communication is one-way from the parent to the child.
+
+Spread operator [ES6]
+var items = ["1", "2", "3"];
+ 
+function printStuff(a, b, c) {
+  console.log("Printing: " + a + " " + b + " " + c);
+}
+We have an array called items that contains three values. We also have a function called printStuff that takes three arguments. We want to specify the three values from our items array as arguments to the printStuff function. Sounds simple enough, right?
+
+Here’s one really common way of doing that:
+printStuff(items[0], items[1], items[2]);
+
+We access each array item individually and pass it in to our printStuff function. With the spread operator, we now have an easier way. 
+You don’t have to specify each item in the array individually; you can just do something like this:
+
+printStuff(...items);
+The spread operator is the ... characters before our items array. Using ...items is identical to calling items[0], items[1], and items[2] individually, as we did earlier. The printStuff function will run and print the numbers 1, 2, and 3 to our console. Pretty cool, right?
+
+Now that you’ve seen the spread operator in action, it’s time to define it. The spread operator allows you to unwrap an array into its individual elements. The spread operator does a few more things as well, but that’s not important for now. We’re going to use only this particular side of the spread operator to solve our property transfer problem.
+
+Spread syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
+
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers));
+// expected output: 6
+
+console.log(sum.apply(null, numbers));
+// expected output: 6
+
+worth reading spread operator https://codeburst.io/javascript-the-spread-operator-a867a71668ca
+
+
+
+index6.html
+Dealing with State in React
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch08.xhtml#ch08
+your properties are considered immutable once they’ve been set. We need another way to store data on a component that goes beyond properties. We need a way to store data that can be changed. What we need is something known as state.
+
+
+class LightningCounter extends React.Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      strikes: 0
+    };
+  }
+ 
+  render() {
+    return (
+      <h1>Hello!</h1>
+    );
+  }
+}
+
+We specify our state object inside our LightningCounter component’s constructor. This runs way before your component gets rendered. We’re telling React to set an object containing our strikes property (initialized to 0).
