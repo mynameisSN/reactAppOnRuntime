@@ -81,3 +81,83 @@ class LightningCounter extends React.Component {
 }
 
 We specify our state object inside our LightningCounter component’s constructor. This runs way before your component gets rendered. We’re telling React to set an object containing our strikes property (initialized to 0).
+
+
+index8.html
+Event in React
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch10.xhtml#ch10
+
+
+index9.html
+The Component Lifecycle
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch11.xhtml#ch11
+
+The lifecycle methods called initially. INITIAL render or Initial *** PHASE ***
+
+1. Default props
+2. Get State (inside constructor method)
+3. componetWillMount
+4. render
+5. componentDidMount
+
+The Updating *** PHASE ***
+After your components get added to the DOM, they can potentially update and re-render when a prop or state change occurs. During this time, a different collection of lifecycle methods gets called. 
+>>>>>>>> SRATE CHANGE HAPPEN
+1. shouldComponentUpdate(newProps, newState)
+2. componentWillUpdate
+3. render
+4. componentDidUpdate
+
+shouldComponentUpdate() => Sometimes you don’t want your component to update when a state change occurs. This method allows you to control this updating behavior. If you use this method and return a true value, the component will update. If this method returns a false value, this component will skip updating. Take a look at a simple snippet:
+
+shouldComponentUpdate(newProps, newState) {
+  console.log("shouldComponentUpdate: Should component update?");
+ 
+  if (newState.count < 5) {
+     console.log("shouldComponentUpdate: Component should update!");
+    return true;
+  } else {
+    ReactDOM.unmountComponentAtNode(destination);
+    console.log("shouldComponentUpdate: Component should not update!");
+    return false;
+  }
+}
+
+componentWillUpdate() => This method gets called just before your component is about to update. Nothing too exciting happens here. One point to note is that you can’t change your state by calling this.setState from this method.
+
+render() => If you didn’t override the update via shouldComponentUpdate, the code inside render gets called again to ensure that your component displays itself properly.
+
+>>>>>>>> PROPS CHANGE HAPPEN
+1. componentWillRecieveProps
+2. shouldComponentUpdate
+3. componentWillUpdate
+4. render
+5. componentDidUpdate
+
+componentWillRecieveProps() => The only new method here is componentWillReceiveProps. This method receives one argument, and this argument contains the new prop value that is about to be assigned to it.
+
+
+The Unmounting *** PHASE ***
+
+1. componetWillMount
+
+
+index10.html
+https://www.safaribooksonline.com/library/view/learning-react-a/9780134843582/ch12.xhtml#ch12
+Accessing DOM Elements in React
+
+using refs
+
+The ReactDOM.createPortal() method takes two arguments: the JSX to print and the DOM element to print that JSX to. The JSX we are printing is just some formatting characters and the color value we passed in as a prop:
+
+class ColorLabel extends React.Component {
+  render() {
+    return ReactDOM.createPortal(
+      ": " + this.props.color,
+      heading
+    );
+  }
+}
+
+index11 folder
+
